@@ -5,13 +5,15 @@
 #endregion
 #region Using Directives
 using System;
+using System.Collections.Generic;
+
 #endregion
 
 namespace Siesta
 {
 	public interface IModelSerializer
 	{
-		string ContentType { get; }
+		IEnumerable<string> ContentTypes { get; }
 		bool IsDefault { get; }
 
 		string Serialize(object model, ModelFormatting formatting);

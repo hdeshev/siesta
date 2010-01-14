@@ -5,6 +5,7 @@
 #endregion
 #region Using Directives
 using System;
+using System.Collections.Generic;
 using Newtonsoft.Json;
 #endregion
 
@@ -14,9 +15,9 @@ namespace Siesta.Serializers
 	{
 		public JsonSerializerSettings Settings { get; private set; }
 
-		public string ContentType
+		public IEnumerable<string> ContentTypes
 		{
-			get { return "application/json"; }
+			get { return new [] { "application/json" }; }
 		}
 
 		public bool IsDefault

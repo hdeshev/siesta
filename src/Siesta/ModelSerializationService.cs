@@ -17,17 +17,28 @@ namespace Siesta
 
 		public IEnumerable<string> SupportedContentTypes
 		{
-			get { return Serializers.Values.Select(s => s.ContentType); }
+			get 
+			{
+				return from serializer in Serializers.Values
+					   from contentType in serializer.ContentTypes
+					   select contentType;
+			}
 		}
 
 		public string DefaultContentType
 		{
-			get { return Serializers.Values.Where(s => s.IsDefault).Select(s => s.ContentType).Single(); }
+			get 
+			{ 
+				return Serializers.Values.Where(s => s.IsDefault).Select(s => s.ContentTypes.First()).Single(); 
+			}
 		}
 
 		public ModelSerializationService(IEnumerable<IModelSerializer> serializers)
 		{
-			Serializers = serializers.ToDictionary(plugin => plugin.ContentType);
+			var flattened = from serializer in serializers
+						  from contentType in serializer.ContentTypes
+						  select new { ContentType = contentType, Serializer = serializer };
+			Serializers = flattened.ToDictionary(item => item.ContentType, item => item.Serializer);
 		}
 
 		public string Serialize(object model, string contentType, ModelFormatting formatting)

@@ -18,9 +18,9 @@ namespace Siesta.Serializers
 	{
 		private readonly Dictionary<RuntimeTypeHandle, DataContractSerializer> _serializers = new Dictionary<RuntimeTypeHandle, DataContractSerializer>();
 
-		public string ContentType
+		public IEnumerable<string> ContentTypes
 		{
-			get { return "application/xml"; }
+			get { return new [] { "application/xml" }; }
 		}
 
 		public bool IsDefault
