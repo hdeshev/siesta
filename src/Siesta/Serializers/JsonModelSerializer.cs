@@ -17,7 +17,7 @@ namespace Siesta.Serializers
 
 		public IEnumerable<string> ContentTypes
 		{
-			get { return new [] { "application/json" }; }
+			get { return new [] { "application/json", "text/json", "text/x-json" }; }
 		}
 
 		public bool IsDefault
